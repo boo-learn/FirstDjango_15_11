@@ -7,6 +7,7 @@ items = [
    {"id": 3, "name": "Coca-cola 1 литр"},
    {"id": 4, "name": "Картофель фри"},
    {"id": 5, "name": "Кепка"},
+   {"id": 6, "name": "Шорты"},
 ]
 user = {
     "name": "Евгений",
@@ -35,7 +36,7 @@ def about(request):
 def get_item(request, id):
     for item in items:
         if item["id"] == id:
-            return HttpResponse(f"<h2>{item['name']}</h2>")
+            return HttpResponse(f"<h2>{item['name']}</h2><a href='/items'>back</a>")
 
     raise Http404
 
@@ -43,6 +44,6 @@ def get_item(request, id):
 def items_list(request):
     result = "<ol>"
     for item in items:
-        result += f"<li>{item['name']}</li>"
+        result += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
     result += "</ol>"
     return HttpResponse(result)
