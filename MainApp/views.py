@@ -19,7 +19,11 @@ user = {
 
 
 def home(request):
-    return HttpResponse("<h1>Welcome, home page</h1>")
+    context = {
+       "name": "Евгений",
+        "surname": "Юрченко"
+    }
+    return render(request, 'index.html', context)
 
 
 def about(request):
@@ -42,8 +46,12 @@ def get_item(request, id):
 
 
 def items_list(request):
-    result = "<ol>"
-    for item in items:
-        result += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
-    result += "</ol>"
-    return HttpResponse(result)
+    # result = "<ol>"
+    # for item in items:
+    #     result += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
+    # result += "</ol>"
+    # return HttpResponse(result)
+    context = {
+        "items": items
+    }
+    return render(request, 'items_list.html', context)
