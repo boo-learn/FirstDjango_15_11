@@ -1,12 +1,6 @@
 from django.shortcuts import render, HttpResponse, Http404
-
-items = [
-    {"id": 1, "name": "Кроссовки abibas", "quantity": 5},
-    {"id": 2, "name": "Куртка кожаная", "quantity": 2},
-    {"id": 3, "name": "Coca-cola 1 литр", "quantity": 12},
-    {"id": 4, "name": "Картофель фри", "quantity": 0},
-    {"id": 5, "name": "Кепка", "quantity": 124},
-]
+from django.core.exceptions import ObjectDoesNotExist
+from MainApp.models import Item
 
 user = {
     "name": "Артём",
@@ -25,17 +19,18 @@ def about(request):
 
 
 def get_items(request, id):
-    for item in items:
-        if item['id'] == id:
-            context = {
-                "item": item
-            }
-            return render(request, 'item.html', context)
-    raise Http404
-
+    try:
+        item = Item.objects.get(id=id)
+        context = {
+            "item": item
+        }
+        return render(request, 'item.html', context)
+    except ObjectDoesNotExist:
+        raise Http404
 
 
 def get_items_list(request):
+    items = Item.objects.all()
     context = {
         "items": items
     }
