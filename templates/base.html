@@ -1,9 +1,7 @@
-{% load static %}
 <html lang="ru" translate="no">
 <head>
     <meta charset="UTF-8">
-    <title>Список товаров</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> {{ page_title }}</title>
     <style>
       ul.breadcrumb {
       padding: 10px 16px;
@@ -40,25 +38,15 @@
         color: #FCA205;
     }
 
-    .item-card {2
-        border: 2px solid blue;
-        height: 100px;
-        display: inline-block;
-    }
+
     </style>
 </head>
 <body>
 <ul class="breadcrumb">
-  <li><a href="/">Главная</a></li>
-  <li>Список товаров</li>
+    {% block breadcrumb %}
+    {% endblock %}
 </ul>
-<h2>Список товаров</h2>
-<ol>
-    {% for item in items %}
-    <li class="item-card"><a href="/item/{{ item.id }}">{{ item.name }}</a></li>
-    {% endfor %}
-</ol>
-
-<b><a href="/">На главную</a></b>
+{% block content %}
+{% endblock %}
 </body>
 </html>
