@@ -9,7 +9,11 @@ user = {
 
 
 def home(request):
-    return render(request, 'index.html', user)
+    context = {
+        "user": user,
+        "page_title": "Home",
+    }
+    return render(request, 'index.html', context)
 
 
 def about(request):
@@ -22,6 +26,7 @@ def get_items(request, id):
     try:
         item = Item.objects.get(id=id)
         context = {
+            "page_title": "Страница товара",
             "item": item
         }
         return render(request, 'item.html', context)
@@ -32,6 +37,7 @@ def get_items(request, id):
 def get_items_list(request):
     items = Item.objects.all()
     context = {
+        "page_title": "Список товаров",
         "items": items
     }
     return render(request, 'items_list.html', context)

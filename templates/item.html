@@ -1,58 +1,15 @@
-{% load static %}
-<html lang="ru" translate="no">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ item.name }}</title>
-    <style>
-      ul.breadcrumb {
-      padding: 10px 16px;
-      list-style: none;
-      background-color: #eee;
-    }
+{% extends 'base.html' %}
 
-    /* Display list items side by side */
-    ul.breadcrumb li {
-      display: inline;
-      font-size: 18px;
-    }
-
-    /* Add a slash symbol (/) before/behind each list item */
-    ul.breadcrumb li+li:before {
-      padding: 8px;
-      color: black;
-      content: "/\00a0";
-    }
-
-    /* Add a color to all links inside the list */
-    ul.breadcrumb li a {
-      color: #0275d8;
-      text-decoration: none;
-    }
-
-    /* Add a color on mouse-over */
-    ul.breadcrumb li a:hover {
-      color: #01447e;
-      text-decoration: underline;
-    }
-
-    h2 {
-        color: #FCA205;
-    }
-
-    </style>
-
-</head>
-<body>
-<ul class="breadcrumb">
+{% block breadcrumb %}
     <li><a href="/">Главная</a></li>
     <li><a href="/items">Список товаров</a></li>
     <li>{{ item.name }}</li>
-</ul>
+{% endblock %}
 
+{% block content %}
     <h2>Наименование товара: {{ item.name }} (ID:{{ item.id }})</h2>
     <h3>Брэнд: {{ item.brand }}</h3>
     <h3>Количество: {{ item.count | default:"Данного товара нет в наличии" }}</h3>
 
-<a href="/items">Вернуться к списку</a>
-</body>
-</html>
+    <a href="/items">Вернуться к списку</a>
+{% endblock %}
