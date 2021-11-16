@@ -6,5 +6,5 @@
 
 {% block content %}
     <h2>Автор: {{user.name}} {{user.last_name}}</h2>
-    <b><a href="/items">Список товаров</a></b>
+    <b><a href="{% url 'items-list' %}">Список товаров</a></b>
 {% endblock %}

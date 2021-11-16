@@ -1,4 +1,4 @@
 .idea/
-django_venv/
-__pychache__/
-db.*
+db.sqlite3
+*venv/
+__pycache__/

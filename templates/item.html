@@ -2,7 +2,7 @@
 
 {% block breadcrumb %}
     <li><a href="/">Главная</a></li>
-    <li><a href="/items">Список товаров</a></li>
+    <li><a href="{% url 'items-list' %}">Список товаров</a></li>
     <li>{{ item.name }}</li>
 {% endblock %}
 
