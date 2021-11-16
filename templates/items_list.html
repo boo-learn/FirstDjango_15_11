@@ -1,15 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="ru" translate="no">
 <head>
     <meta charset="UTF-8">
-    <title>Items list</title>
+    <title>Список товаров</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<ul class="breadcrumb">
+  <li><a href="/">Главная</a></li>
+  <li>Список товаров</li>
+</ul>
 <h2>Список товаров</h2>
 <ol>
     {% for item in items %}
-    <li><a href="/item/{{ item.id }}"> {{ item.name }} </a></li>
+    <li><a href="/item/{{ item.id }}">{{ item.name }}</a></li>
     {% endfor %}
 </ol>
+
+<b><a href="/">На главную</a></b>
 </body>
 </html>

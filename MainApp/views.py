@@ -1,56 +1,41 @@
 from django.shortcuts import render, HttpResponse, Http404
 
-
 items = [
-   {"id": 1, "name": "Кроссовки abibas"},
-   {"id": 2, "name": "Куртка кожаная"},
-   {"id": 3, "name": "Coca-cola 1 литр"},
-   {"id": 4, "name": "Картофель фри"},
-   {"id": 5, "name": "Кепка"},
-   {"id": 6, "name": "Шорты"},
+    {"id": 1, "name": "Кроссовки abibas", "quantity": 5},
+    {"id": 2, "name": "Куртка кожаная", "quantity": 2},
+    {"id": 3, "name": "Coca-cola 1 литр", "quantity": 12},
+    {"id": 4, "name": "Картофель фри", "quantity": 0},
+    {"id": 5, "name": "Кепка", "quantity": 124},
 ]
+
 user = {
-    "name": "Евгений",
-    "surname": "Юрченко",
-    "middlename": "Витальевич",
-    "phone": "+7-900-800-11-22",
-    "email": "eyurchenko@specialist.ru",
+    "name": "Артём",
+    "last_name": "Мовланов"
 }
 
 
 def home(request):
-    context = {
-       "name": "Евгений",
-        "surname": "Юрченко"
-    }
-    return render(request, 'index.html', context)
+    return render(request, 'index.html', user)
 
 
 def about(request):
-    result = f"""
-        Имя: <b>{user['name']}</b><br>
-        Отчество: {user['middlename']}<br>
-        Фамилия: Иванов<br>
-        телефон: {user['phone']}<br>
-        email: vasya@mail.ru<br>
-    """
-    return HttpResponse(result)
+    html_text = "Имя: <b>Иван</b><br>Отчество: <b>Петрович</b><br>Фамилия: <b>Иванов</b><br>телефон: " \
+                "<b>8-923-600-01-02</b><br>email: <b>vasya@mail.ru</b>"
+    return HttpResponse(html_text)
 
 
-def get_item(request, id):
+def get_items(request, id):
     for item in items:
-        if item["id"] == id:
-            return HttpResponse(f"<h2>{item['name']}</h2><a href='/items'>back</a>")
-
+        if item['id'] == id:
+            context = {
+                "item": item
+            }
+            return render(request, 'item.html', context)
     raise Http404
 
 
-def items_list(request):
-    # result = "<ol>"
-    # for item in items:
-    #     result += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
-    # result += "</ol>"
-    # return HttpResponse(result)
+
+def get_items_list(request):
     context = {
         "items": items
     }
